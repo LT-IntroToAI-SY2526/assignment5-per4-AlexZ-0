@@ -228,7 +228,7 @@ def BFS(state: Board) -> Board:
         if current_board.goal_test():
             end_time = time.time()
             elapsed_time = end_time - start_time
-            print(f"BFS took {iteration} iteration in {elasped_time:.4f} seconds")
+            print(f"BFS took {iteration} iteration in {elapsed_time:.4f} seconds")
             return current_board
         return None
 
