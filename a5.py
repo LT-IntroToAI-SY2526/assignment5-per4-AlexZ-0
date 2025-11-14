@@ -218,19 +218,33 @@ def BFS(state: Board) -> Board:
     Returns:
         either None in the case of invalid input or a solved board
     """
-    queue = Queue()
-    queue.push(state)
-    iteration = 0
+def BFS(state: Board) -> Board:
+    """Performs a breadth-first search to solve the Sudoku board."""
+
+    the_queue = Queue()
+    the_queue.push(state)
     start_time = time.time()
-    while not queue.is_empty():
-        itertion += 1
-        current_board = queue.pop()
+    iterations = 0
+    while not the_queue.is_empty():
+        iterations += 1
+        current_board = the_queue.pop()
+
         if current_board.goal_test():
-            end_time = time.time()
-            elapsed_time = end_time - start_time
-            print(f"BFS took {iteration} iteration in {elapsed_time:.4f} seconds")
+            elapsed_time = time.time() - start_time
+            print(f"BFS took {iterations} iterations in {elapsed_time:.4f} seconds")
             return current_board
-        return None
+        if current_board.failure_test():
+            continue
+        row, col = current_board.find_most_constrained_cell()
+        possible_values = current_board.rows[row][col]
+        if not isinstance(possible_values, list):
+            continue
+        for val in possible_values:
+            new_board = copy.deepcopy(current_board)
+            new_board.update(row, col, val)
+            the_queue.push(new_board)
+    return None
+
 
 if __name__ == "__main__":
     # uncomment the below lines once you've implemented the board class
