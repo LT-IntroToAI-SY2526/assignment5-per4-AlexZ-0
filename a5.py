@@ -172,20 +172,7 @@ class Board:
 
 
 def DFS(state: Board) -> Board:
-    """Performs a depth first search. Takes a Board and attempts to assign values to
-    most constrained cells until a solution is reached or a mistake has been made at
-    which point it backtracks.
-
-    Args:
-        state - an instance of the Board class to solve, need to find most constrained
-            cell and attempt an assignment
-
-    Returns:
-        either None in the case of invalid input or a solved board
-    """
     the_stack = Stack([state])
-    stack = Stack()
-    stack.push(state)
     start_time = time.time()
     iterations = 0
     while not the_stack.is_empty():
@@ -201,49 +188,35 @@ def DFS(state: Board) -> Board:
         possible_values = current_board.rows[row][col]
         print(row, col)
         if not current_board.failure_test():
-            for val in possible_values: 
+            for val in possible_values:
                 new_board = copy.deepcopy(current_board)
                 new_board.update(row, col, val)
+                the_stack.push(new_board)
     return None
-
 def BFS(state: Board) -> Board:
-    """Performs a breadth first search. Takes a Board and attempts to assign values to
-    most constrained cells until a solution is reached or a mistake has been made at
-    which point it backtracks.
-
-    Args:
-        state - an instance of the Board class to solve, need to find most constrained
-            cell and attempt an assignment
-
-    Returns:
-        either None in the case of invalid input or a solved board
-    """
-def BFS(state: Board) -> Board:
-    """Performs a breadth-first search to solve the Sudoku board."""
-
-    the_queue = Queue()
-    the_queue.push(state)
+    the_queue = Queue([state])
     start_time = time.time()
     iterations = 0
     while not the_queue.is_empty():
         iterations += 1
         current_board = the_queue.pop()
-
+        print(current_board) 
         if current_board.goal_test():
-            elapsed_time = time.time() - start_time
+            end_time = time.time()
+            elapsed_time = end_time - start_time
             print(f"BFS took {iterations} iterations in {elapsed_time:.4f} seconds")
             return current_board
-        if current_board.failure_test():
-            continue
         row, col = current_board.find_most_constrained_cell()
         possible_values = current_board.rows[row][col]
-        if not isinstance(possible_values, list):
-            continue
-        for val in possible_values:
-            new_board = copy.deepcopy(current_board)
-            new_board.update(row, col, val)
-            the_queue.push(new_board)
+        print(row, col)
+        if not current_board.failure_test():
+            for val in possible_values:
+                new_board = copy.deepcopy(current_board)
+                new_board.update(row, col, val)
+                the_queue.push(new_board)
     return None
+
+
 
 
 if __name__ == "__main__":
