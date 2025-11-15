@@ -22,11 +22,13 @@ After completing the assignment, answer the following reflection questions:
 ## Reflection Questions
 
 1. What are some things that you learned through this assignment? Think about the concepts of backtracking, constraint satisfaction, and search algorithms. Were there any particular challenges you faced while implementing the Board class methods or the DFS/BFS functions? How did you overcome them?
-
+How BFS and DFS work and how backtracking and constraint satifaction where used to solve the board. I found figuring out how update and find most constrained cell a challenge
 
 
 2. How can you apply what you learned in this assignment to future programs or projects? Consider other types of problems that involve searching through possibilities, making decisions, and backtracking when those decisions don't work out. Can you think of real-world scenarios where DFS or BFS might be useful? What about other constraint satisfaction problems?
-
+Can be applied to almost any problems that require exploring possibilities. Examples includes puzzles, maps, and pathfinding. DFS can be used for puzzles such as chess, sudoku, tic tac toe, bfs can be used for gps and maps 
 
 
 3. Explain how the Stack and Queue classes work and why they are important for DFS and BFS algorithms. Describe the difference between LIFO (Last In First Out) and FIFO (First In First Out) data structures. How does using a Stack versus a Queue change the way the search algorithm explores possible solutions? Why is one data structure better suited for depth-first search and the other for breadth-first search?
+   Stack - new items are added and rmoved form the top also known as FIFO. Better for DFS as it explores in depth before backtracking. Last decision is always rconsidered if the path fails
+   Queue - items are added in from the back and remoeved from the front also known LIFO. Best for BFS as it explored all possiblities. older unexplored nodes is always first
